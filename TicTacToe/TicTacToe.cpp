@@ -1,95 +1,168 @@
 ﻿#include <iostream>
 using namespace std;
+
+/**
+ * @brief Класс TicTacToe реализует игру крестики-нолики.
+ */
 class TicTacToe {
 private:
-    char currentPlayer;
-    char Table[3][3];
-    char def;
-    bool fwin = false;
+    static const int SIZE = 3; ///< Размер игрового поля.
+    static const char EMPTY_CELL = '.'; ///< Символ для пустой ячейки.
+    static const char PLAYER_X = 'x'; ///< Символ игрока X.
+    static const char PLAYER_O = '0'; ///< Символ игрока O.
 
-    void resTable() {
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                Table[i][j] = '.';
+    char currentPlayer; ///< Текущий игрок.
+    char Table[SIZE][SIZE]; ///< Игровое поле.
+    char defaultPlayer; ///< Игрок, который начинает игру.
+    bool gameWon = false; ///< Флаг, показывающий, завершена ли игра.
+
+    /**
+     * @brief Сбрасывает игровое поле до начального состояния.
+     */
+    void resetTable() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                Table[i][j] = EMPTY_CELL;
             }
         }
     }
+
+    /**
+     * @brief Проверяет, является ли ход валидным.
+     * @param row Номер строки.
+     * @param col Номер столбца.
+     * @return true, если ход валидный, иначе false.
+     */
+    bool isMoveValid(int row, int col) {
+        return row >= 0 && row < SIZE && col >= 0 && col < SIZE && Table[row][col] == EMPTY_CELL;
+    }
+
+    /**
+     * @brief Проверяет условие победы.
+     * @return true, если текущий игрок выиграл, иначе false.
+     */
+    bool checkWinCondition() {
+        for (int i = 0; i < SIZE; i++) {
+            if ((Table[i][0] == currentPlayer && Table[i][1] == currentPlayer && Table[i][2] == currentPlayer) ||
+                (Table[0][i] == currentPlayer && Table[1][i] == currentPlayer && Table[2][i] == currentPlayer)) {
+                return true;
+            }
+        }
+        return (Table[0][0] == currentPlayer && Table[1][1] == currentPlayer && Table[2][2] == currentPlayer) ||
+            (Table[0][2] == currentPlayer && Table[1][1] == currentPlayer && Table[2][0] == currentPlayer);
+    }
+
 public:
-    TicTacToe(char _start = 'x')
-    {
-        if (_start == '0') {
-            currentPlayer = _start;
-            def = _start;
+    /**
+     * @brief Конструктор класса TicTacToe.
+     * @param startPlayer Игрок, который начинает игру. По умолчанию 'x'.
+     */
+    TicTacToe(char startPlayer = PLAYER_X) {
+        if (startPlayer == PLAYER_O) {
+            currentPlayer = startPlayer;
+            defaultPlayer = startPlayer;
         }
         else {
-            currentPlayer = 'x';
-            def = 'x';
+            currentPlayer = PLAYER_X;
+            defaultPlayer = PLAYER_X;
         }
-
-        resTable();
+        resetTable();
     }
 
+    /**
+     * @brief Проверяет, выиграл ли текущий игрок.
+     * @return true, если текущий игрок выиграл, иначе false.
+     */
     bool isWin() {
-        for (int i = 0; i < 3; i++) {
-            if (Table[i][0] == currentPlayer && Table[i][1] == currentPlayer && Table[i][2] == currentPlayer) return true;
-            if (Table[0][i] == currentPlayer && Table[1][i] == currentPlayer && Table[2][i] == currentPlayer) return true;
-        }
-        if (Table[0][0] == currentPlayer && Table[1][1] == currentPlayer && Table[2][2] == currentPlayer) return true;
-        if (Table[0][2] == currentPlayer && Table[1][1] == currentPlayer && Table[2][0] == currentPlayer) return true;
-        return false;
+        return checkWinCondition();
     }
 
+    /**
+     * @brief Проверяет, завершилась ли игра вничью.
+     * @return true, если игра завершилась вничью, иначе false.
+     */
     bool isDraw() {
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                if (Table[i][j] == '.') return false;
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (Table[i][j] == EMPTY_CELL) {
+                    return false;
+                }
             }
         }
         return true;
     }
 
-    void make_to_move(int r, int c) {
-        int col = c - 1;
-        int row = r - 1;
-        if (row < 0 || row > 2 || col < 0 || col > 2 || Table[row][col] != '.' || fwin) {
+    /**
+     * @brief Делает ход в указанную ячейку.
+     * @param row Номер строки.
+     * @param col Номер столбца.
+     */
+    void makeMove(int row, int col) {
+        int actualRow = row - 1;
+        int actualCol = col - 1;
+
+        if (!isMoveValid(actualRow, actualCol) || gameWon) {
             cout << "Ход не может быть выполнен" << endl;
             return;
         }
-        else {
-            Table[row][col] = currentPlayer;
-        }
+
+        Table[actualRow][actualCol] = currentPlayer;
 
         if (isWin()) {
             cout << "Победитель - " << (char)toupper(currentPlayer) << endl;
-            fwin = true;
+            gameWon = true;
             return;
         }
 
         if (isDraw()) {
             cout << "Ничья" << endl;
-            fwin = true;
+            gameWon = true;
             return;
         }
 
-        currentPlayer = (currentPlayer == 'x') ? '0' : 'x';
+        currentPlayer = (currentPlayer == PLAYER_X) ? PLAYER_O : PLAYER_X;
     }
-    void show_table() {
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
+
+    /**
+     * @brief Выводит текущее состояние игрового поля.
+     */
+    void showTable() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
                 cout << Table[i][j];
             }
             cout << endl;
         }
+        cout << endl;
     }
+
+    /**
+     * @brief Перезапускает игру.
+     */
     void restart() {
-        resTable();
-        fwin = false;
-        currentPlayer = def;
+        resetTable();
+        gameWon = false;
+        currentPlayer = defaultPlayer;
     }
 };
+
+/**
+ * @brief Точка входа в программу.
+ * @return 0 в случае успешного выполнения.
+ */
+int main() {
+    setlocale(LC_ALL, "ru");
+    TicTacToe game;
+    game.showTable();
+    game.makeMove(1, 1);
+    game.showTable();
+    game.makeMove(1, 2);
+    game.showTable();
+    game.makeMove(2, 2);
+    game.showTable();
+    game.makeMove(1, 3);
+    game.showTable();
+    game.makeMove(3, 3);
+    game.showTable();
+    return 0;
+}
