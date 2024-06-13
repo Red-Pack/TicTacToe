@@ -1,0 +1,114 @@
+\doxysection{Tic\+Tac\+Toe Class Reference}
+\hypertarget{class_tic_tac_toe}{}\label{class_tic_tac_toe}\index{TicTacToe@{TicTacToe}}
+
+
+Класс \doxylink{class_tic_tac_toe}{Tic\+Tac\+Toe} реализует игру "{}Крестики-\/нолики"{}.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tic_tac_toe_a252de58019ee836f3b6584918f426942}{Tic\+Tac\+Toe}} (char start\+Player=PLAYER\+\_\+X)
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{class_tic_tac_toe}{Tic\+Tac\+Toe}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_tic_tac_toe_a7b382b693238dc37cc431618fd6e235e}{is\+Win}} ()
+\begin{DoxyCompactList}\small\item\em Проверяет, выиграл ли текущий игрок. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_tic_tac_toe_a020ee46d1c626f1fd635195d725b3320}{is\+Draw}} ()
+\begin{DoxyCompactList}\small\item\em Проверяет, завершилась ли игра вничью. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tic_tac_toe_a42a7def950c31efda0b6716218d42446}{make\+Move}} (int row, int col)
+\begin{DoxyCompactList}\small\item\em Делает ход в указанную ячейку. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tic_tac_toe_ac6acc85e348f463fa59e42af0d09de30}{show\+Table}} ()
+\begin{DoxyCompactList}\small\item\em Выводит текущее состояние игрового поля. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tic_tac_toe_a5d1f7fc152db4a3457322803394d2438}{restart}} ()
+\begin{DoxyCompactList}\small\item\em Перезапускает игру. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс \doxylink{class_tic_tac_toe}{Tic\+Tac\+Toe} реализует игру "{}Крестики-\/нолики"{}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_tic_tac_toe_a252de58019ee836f3b6584918f426942}\index{TicTacToe@{TicTacToe}!TicTacToe@{TicTacToe}}
+\index{TicTacToe@{TicTacToe}!TicTacToe@{TicTacToe}}
+\doxysubsubsection{\texorpdfstring{TicTacToe()}{TicTacToe()}}
+{\footnotesize\ttfamily \label{class_tic_tac_toe_a252de58019ee836f3b6584918f426942} 
+Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe (\begin{DoxyParamCaption}\item[{char}]{start\+Player}{ = {\ttfamily PLAYER\+\_\+X}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Конструктор класса \doxylink{class_tic_tac_toe}{Tic\+Tac\+Toe}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Player} & Игрок, который начинает игру. По умолчанию \textquotesingle{}x\textquotesingle{}. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_tic_tac_toe_a020ee46d1c626f1fd635195d725b3320}\index{TicTacToe@{TicTacToe}!isDraw@{isDraw}}
+\index{isDraw@{isDraw}!TicTacToe@{TicTacToe}}
+\doxysubsubsection{\texorpdfstring{isDraw()}{isDraw()}}
+{\footnotesize\ttfamily \label{class_tic_tac_toe_a020ee46d1c626f1fd635195d725b3320} 
+bool Tic\+Tac\+Toe\+::is\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Проверяет, завершилась ли игра вничью. 
+
+\begin{DoxyReturn}{Returns}
+true, если игра завершилась вничью, иначе false. 
+\end{DoxyReturn}
+\Hypertarget{class_tic_tac_toe_a7b382b693238dc37cc431618fd6e235e}\index{TicTacToe@{TicTacToe}!isWin@{isWin}}
+\index{isWin@{isWin}!TicTacToe@{TicTacToe}}
+\doxysubsubsection{\texorpdfstring{isWin()}{isWin()}}
+{\footnotesize\ttfamily \label{class_tic_tac_toe_a7b382b693238dc37cc431618fd6e235e} 
+bool Tic\+Tac\+Toe\+::is\+Win (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Проверяет, выиграл ли текущий игрок. 
+
+\begin{DoxyReturn}{Returns}
+true, если текущий игрок выиграл, иначе false. 
+\end{DoxyReturn}
+\Hypertarget{class_tic_tac_toe_a42a7def950c31efda0b6716218d42446}\index{TicTacToe@{TicTacToe}!makeMove@{makeMove}}
+\index{makeMove@{makeMove}!TicTacToe@{TicTacToe}}
+\doxysubsubsection{\texorpdfstring{makeMove()}{makeMove()}}
+{\footnotesize\ttfamily \label{class_tic_tac_toe_a42a7def950c31efda0b6716218d42446} 
+void Tic\+Tac\+Toe\+::make\+Move (\begin{DoxyParamCaption}\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Делает ход в указанную ячейку. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Номер строки. \\
+\hline
+{\em col} & Номер столбца. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_tic_tac_toe_a5d1f7fc152db4a3457322803394d2438}\index{TicTacToe@{TicTacToe}!restart@{restart}}
+\index{restart@{restart}!TicTacToe@{TicTacToe}}
+\doxysubsubsection{\texorpdfstring{restart()}{restart()}}
+{\footnotesize\ttfamily \label{class_tic_tac_toe_a5d1f7fc152db4a3457322803394d2438} 
+void Tic\+Tac\+Toe\+::restart (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Перезапускает игру. 
+
+\Hypertarget{class_tic_tac_toe_ac6acc85e348f463fa59e42af0d09de30}\index{TicTacToe@{TicTacToe}!showTable@{showTable}}
+\index{showTable@{showTable}!TicTacToe@{TicTacToe}}
+\doxysubsubsection{\texorpdfstring{showTable()}{showTable()}}
+{\footnotesize\ttfamily \label{class_tic_tac_toe_ac6acc85e348f463fa59e42af0d09de30} 
+void Tic\+Tac\+Toe\+::show\+Table (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Выводит текущее состояние игрового поля. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Tic\+Tac\+Toe/\mbox{\hyperlink{_tic_tac_toe_8cpp}{Tic\+Tac\+Toe.\+cpp}}\end{DoxyCompactItemize}

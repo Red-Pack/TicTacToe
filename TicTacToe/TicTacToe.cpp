@@ -1,4 +1,4 @@
-﻿﻿#include <iostream>
+﻿#include <iostream>
 using namespace std;
 
 /**
@@ -176,6 +176,7 @@ public:
  * @return 0 в случае успешного выполнения.
  */
 int main() {
+    setlocale(LC_ALL, "ru");
     TicTacToe game;
     game.showTable();
     game.makeMove(1, 1);
