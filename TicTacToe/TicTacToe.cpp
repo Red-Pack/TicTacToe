@@ -2,12 +2,12 @@
 using namespace std;
 
 /**
- * @brief Класс TicTacToe реализует игру крестики-нолики.
+ * @brief Класс TicTacToe реализует игру "Крестики-нолики".
  */
 class TicTacToe {
 private:
-    static const int SIZE = 3; ///< Размер игрового поля.
-    static const char EMPTY_CELL = '.'; ///< Символ для пустой ячейки.
+    static const int SIZE = 3; ///< Размер игрового поля (3x3).
+    static const char EMPTY_CELL = '.'; ///< Символ, обозначающий пустую ячейку.
     static const char PLAYER_X = 'x'; ///< Символ игрока X.
     static const char PLAYER_O = '0'; ///< Символ игрока O.
 
@@ -28,13 +28,31 @@ private:
     }
 
     /**
-     * @brief Проверяет, является ли ход валидным.
+     * @brief Проверяет, является ли указанная строка выигрышной.
      * @param row Номер строки.
-     * @param col Номер столбца.
-     * @return true, если ход валидный, иначе false.
+     * @return true, если строка выигрышная, иначе false.
      */
-    bool isMoveValid(int row, int col) {
-        return row >= 0 && row < SIZE && col >= 0 && col < SIZE && Table[row][col] == EMPTY_CELL;
+    bool isRowWin(int row) {
+        return Table[row][0] == currentPlayer && Table[row][1] == currentPlayer && Table[row][2] == currentPlayer;
+    }
+
+    /**
+     * @brief Проверяет, является ли указанный столбец выигрышным.
+     * @param col Номер столбца.
+     * @return true, если столбец выигрышный, иначе false.
+     */
+    bool isColWin(int col) {
+        return Table[0][col] == currentPlayer && Table[1][col] == currentPlayer && Table[2][col] == currentPlayer;
+    }
+
+    /**
+     * @brief Проверяет, является ли одна из диагоналей выигрышной.
+     * @return true, если одна из диагоналей выигрышная, иначе false.
+     */
+    bool isDiagonalWin() {
+        bool leftToRight = Table[0][0] == currentPlayer && Table[1][1] == currentPlayer && Table[2][2] == currentPlayer;
+        bool rightToLeft = Table[0][2] == currentPlayer && Table[1][1] == currentPlayer && Table[2][0] == currentPlayer;
+        return leftToRight || rightToLeft;
     }
 
     /**
@@ -43,13 +61,21 @@ private:
      */
     bool checkWinCondition() {
         for (int i = 0; i < SIZE; i++) {
-            if ((Table[i][0] == currentPlayer && Table[i][1] == currentPlayer && Table[i][2] == currentPlayer) ||
-                (Table[0][i] == currentPlayer && Table[1][i] == currentPlayer && Table[2][i] == currentPlayer)) {
+            if (isRowWin(i) || isColWin(i)) {
                 return true;
             }
         }
-        return (Table[0][0] == currentPlayer && Table[1][1] == currentPlayer && Table[2][2] == currentPlayer) ||
-            (Table[0][2] == currentPlayer && Table[1][1] == currentPlayer && Table[2][0] == currentPlayer);
+        return isDiagonalWin();
+    }
+
+    /**
+     * @brief Проверяет, является ли ход валидным.
+     * @param row Номер строки.
+     * @param col Номер столбца.
+     * @return true, если ход валидный, иначе false.
+     */
+    bool isMoveValid(int row, int col) {
+        return row >= 0 && row < SIZE && col >= 0 && col < SIZE && Table[row][col] == EMPTY_CELL;
     }
 
 public:
@@ -133,7 +159,6 @@ public:
             }
             cout << endl;
         }
-        cout << endl;
     }
 
     /**
@@ -151,7 +176,6 @@ public:
  * @return 0 в случае успешного выполнения.
  */
 int main() {
-    setlocale(LC_ALL, "ru");
     TicTacToe game;
     game.showTable();
     game.makeMove(1, 1);
